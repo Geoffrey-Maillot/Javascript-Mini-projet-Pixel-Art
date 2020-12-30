@@ -48,8 +48,7 @@ const colorPicker = {
   
   //Génère la grille
   generateGrill: function(gridSize) {
-
-   
+    
     for (row = 0; row < gridSize; row++) {
       const createRow = document.createElement(`div`);
       createRow.className  = `row`;
@@ -64,26 +63,26 @@ const colorPicker = {
   },
   //Applique la couleur à la cellule
   handlerChangeColor: function (event) {
-
+    
     if (event.target.id === colorPicker.color) {
-       event.target.id = ``
+      event.target.id = ``
     }
     else(event.target.id = colorPicker.color)
-   
+    
   },
-
+  //Formulaire pour dimentionner la grille
   sizeGrill: function () {
     formElem = document.getElementById(`configuration`);
     formElem.addEventListener(`submit`, (event) => {
-
+      
       event.preventDefault()
       const inputElem = document.getElementById(`size`)
       colorPicker.gridSize = inputElem.valueAsNumber
       inputElem.innerHTML= ``;
       colorPicker.element.innerHTML = ``
-
-     colorPicker.generateGrill(colorPicker.gridSize)
-
+      
+      colorPicker.generateGrill(colorPicker.gridSize)
+      
     } )
   },
   

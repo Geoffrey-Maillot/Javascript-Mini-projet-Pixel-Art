@@ -1,0 +1,94 @@
+#configuration {
+  width: 100%;
+  background-color:blue ;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#configuration label {
+font-size: 1.5rem;
+
+}
+
+#configuration input {
+height: 30px ;
+width: 200px;
+border-radius: 5px;
+margin-left: 30px;
+box-shadow: none;
+background-color: rgba(255, 255, 255, 0.4);
+margin-right: 30px;
+border: none;
+}
+
+#configuration button {
+  padding: .5rem;
+  width: 50px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: none;
+}
+
+#containerGrill {
+  background-color: rgb(166, 166, 214);
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+.red {
+  background-color: red;
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+}
+
+.color-list {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 10%;
+height: calc(100vh - 100px);
+flex: none;
+
+}
+
+.color {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: 40px;
+}
+
+.color:hover {
+  cursor: pointer;
+}
+
+
+#blue {background-color: blue; }
+#red { background-color: red;}
+#green { background-color: green;}
+#purple { background-color: purple;}
+#orange {background-color: orange; }
+#grey {background-color: grey; }
+#yellow { background-color: yellow;}
+#pink {background-color: pink; }
+#black {background-color: black; }
+#white {background-color: white; }
+
+

@@ -7,37 +7,10 @@ const colorPicker = {
   
   // Récupère les div de la palette et pose un écouteur
   getColor: function() {
-    const blue = document.getElementById(`blue`)
-    blue.addEventListener(`click`, colorPicker.saveColor)
-    
-    const red = document.getElementById(`red`)
-    red.addEventListener(`click`, colorPicker.saveColor)
-    
-    const green = document.getElementById(`green`)
-    green.addEventListener(`click`, colorPicker.saveColor)
-    
-    const purple = document.getElementById(`purple`)
-    purple.addEventListener(`click`, colorPicker.saveColor)
-    
-    const orange = document.getElementById(`orange`)
-    orange.addEventListener(`click`, colorPicker.saveColor)
-    
-    const grey = document.getElementById(`grey`)
-    grey.addEventListener(`click`, colorPicker.saveColor)
-    
-    const yellow = document.getElementById(`yellow`)
-    yellow.addEventListener(`click`, colorPicker.saveColor)
-    
-    const pink = document.getElementById(`pink`)
-    pink.addEventListener(`click`, colorPicker.saveColor)
-    
-    const black = document.getElementById(`black`)
-    black.addEventListener(`click`, colorPicker.saveColor)
-    
-    const white = document.getElementById(`white`)
-    white.addEventListener(`click`, colorPicker.saveColor)
-    
-    
+    for(index = 1; index < 10; index++){
+      const color = document.getElementById(`color-${index}`)
+    color.addEventListener(`click`, colorPicker.saveColor)
+    }
   },
   
   //Sauvegarde la couleurs de la palette qui a été cliquer
@@ -47,7 +20,7 @@ const colorPicker = {
   }, 
   
   //Génère la grille
-  generateGrill: function(gridSize) {
+  generateGrill: function(gridSize, size) {
     
     for (row = 0; row < gridSize; row++) {
       const createRow = document.createElement(`div`);
@@ -55,7 +28,7 @@ const colorPicker = {
       colorPicker.element.appendChild(createRow);
       for(cell = 0; cell < gridSize; cell++) {
         const createCell = document.createElement(`div`);
-        createCell.className = `cell`;
+        createCell.classList.add("cell", size);
         createRow.appendChild(createCell);
         createCell.addEventListener(`click`, colorPicker.handlerChangeColor)
       }
@@ -74,21 +47,30 @@ const colorPicker = {
   sizeGrill: function () {
     formElem = document.getElementById(`configuration`);
     formElem.addEventListener(`submit`, (event) => {
+    event.preventDefault()
+
+      const inputSizeGrillElem = document.getElementById(`size`)
+      colorPicker.gridSize = inputSizeGrillElem.valueAsNumber
+      inputSizeGrillElem.innerHTML= ``;
+      colorPicker.element.innerHTML = ``;
       
-      event.preventDefault()
-      const inputElem = document.getElementById(`size`)
-      colorPicker.gridSize = inputElem.valueAsNumber
-      inputElem.innerHTML= ``;
-      colorPicker.element.innerHTML = ``
+
+      const inputSizeCellElem = document.getElementById(`cellSize`)
+      let  value = inputSizeCellElem.valueAsNumber
+
+      //faire un test pour vérifier la valeur de de 10 20 ou 30 ici.
       
-      colorPicker.generateGrill(colorPicker.gridSize)
+      let sizeCell = `cell-${value}`
+     
+      
+      colorPicker.generateGrill(colorPicker.gridSize, sizeCell)
       
     } )
   },
-  
+ 
   init: function() {
     colorPicker.element = document.getElementById(`containerGrill`);
-    colorPicker.generateGrill(colorPicker.gridSize)
+    colorPicker.generateGrill(colorPicker.gridSize, `cell-20`)
     colorPicker.getColor()
     colorPicker.sizeGrill()
   },

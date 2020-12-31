@@ -38,12 +38,12 @@ font-weight: 700;
 #containerGrill {
   background: rgb(120,86,187);
   background: linear-gradient(315deg, rgba(120,86,187,0.5690651260504201) 0%, rgba(63,135,189,1) 100%);
-  
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 90%;
+  overflow: auto;
 }
 
 .cell {

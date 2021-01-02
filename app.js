@@ -7,7 +7,7 @@ const colorPicker = {
   
   // Récupère les div de la palette et pose un écouteur
   getColor: function() {
-    for(index = 1; index < 10; index++){
+    for(index = 1; index < 51; index++){
       const color = document.getElementById(`color-${index}`)
     color.addEventListener(`click`, colorPicker.saveColor)
     }
@@ -43,7 +43,7 @@ const colorPicker = {
     else(event.target.id = colorPicker.color)
     
   },
-  //Formulaire pour dimentionner la grille
+  //Formulaire pour dimentionner la grille et les cellules
   sizeGrill: function () {
     formElem = document.getElementById(`configuration`);
     formElem.addEventListener(`submit`, (event) => {
@@ -56,15 +56,18 @@ const colorPicker = {
       
 
       const inputSizeCellElem = document.getElementById(`cellSize`)
-      let  value = inputSizeCellElem.valueAsNumber
+      let value = inputSizeCellElem.valueAsNumber
 
-      //faire un test pour vérifier la valeur de de 10 20 ou 30 ici.
-      
-      let sizeCell = `cell-${value}`
-     
-      
-      colorPicker.generateGrill(colorPicker.gridSize, sizeCell)
-      
+        if (value === 10 || value === 20 || value === 30) {
+          let sizeCell = `cell-${value}`
+          colorPicker.generateGrill(colorPicker.gridSize, sizeCell)
+        }
+        else {
+          colorPicker.element.innerHTML =
+           `Définissez la taille de la grille
+           puis
+           choisissez la taille des  cellules entre 10, 20 ou 30`
+        }
     } )
   },
  

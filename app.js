@@ -1,5 +1,5 @@
 const colorPicker = {
-  gridSize: 10,
+  gridSize: 25,
   element: null,
   //propriété qui sert à stocké la couleurs du picker
   color: null,
@@ -47,27 +47,29 @@ const colorPicker = {
   sizeGrill: function () {
     formElem = document.getElementById(`configuration`);
     formElem.addEventListener(`submit`, (event) => {
-    event.preventDefault()
-
-      const inputSizeGrillElem = document.getElementById(`size`)
-      colorPicker.gridSize = inputSizeGrillElem.valueAsNumber
-      inputSizeGrillElem.innerHTML= ``;
-      colorPicker.element.innerHTML = ``;
+      event.preventDefault()
       
-
+      const inputSizeGrillElem = document.getElementById(`size`)
       const inputSizeCellElem = document.getElementById(`cellSize`)
+      colorPicker.gridSize = inputSizeGrillElem.valueAsNumber
       let value = inputSizeCellElem.valueAsNumber
+      inputSizeGrillElem.innerHTML= ``;
+      inputSizeCellElem.innerHTML= ``;
+      colorPicker.element.innerHTML = ``;
 
-        if (value === 10 || value === 20 || value === 30) {
-          let sizeCell = `cell-${value}`
-          colorPicker.generateGrill(colorPicker.gridSize, sizeCell)
-        }
-        else {
-          colorPicker.element.innerHTML =
-           `Définissez la taille de la grille
-           puis
-           choisissez la taille des  cellules entre 10, 20 ou 30`
-        }
+      
+      
+      
+      if (value === 10 || value === 20 || value === 30) {
+        let sizeCell = `cell-${value}`
+        colorPicker.generateGrill(colorPicker.gridSize, sizeCell)
+      }
+      else {
+        colorPicker.element.innerHTML =
+        `Définissez la taille de la grille
+        puis
+        choisissez la taille des  cellules entre 10, 20 ou 30`
+      }
     } )
   },
  

@@ -1,32 +1,32 @@
 const colorPicker = {
   gridSize: 25,
   element: null,
-  //propriété qui sert à stocké la couleurs du picker
+  // propriété qui sert à stocké la couleurs du picker
   color: null,
   isDown: false,
 
   // Récupère les div de la palette et pose un écouteur
-  getColor: function () {
-    for (index = 1; index < 51; index++) {
+  getColor() {
+    for (let index = 1; index < 51; index = +1) {
       const color = document.getElementById(`color-${index}`);
       color.addEventListener(`click`, colorPicker.saveColor);
     }
   },
 
-  //Sauvegarde la couleurs de la palette qui a été cliquer
-  saveColor: function (event) {
+  // Sauvegarde la couleurs de la palette qui a été cliquer
+  saveColor(event) {
     colorPicker.color = event.target.id;
   },
 
-  //Génère la grille
-  generateGrill: function (gridSize, size) {
-    for (row = 0; row < gridSize; row++) {
+  // Génère la grille
+  generateGrill(gridSize, size) {
+    for (let row = 0; row < gridSize; row = +1) {
       const createRow = document.createElement(`div`);
       createRow.className = `row`;
       colorPicker.element.appendChild(createRow);
-      for (cell = 0; cell < gridSize; cell++) {
+      for (let cell = 0; cell < gridSize; cell = +1) {
         const createCell = document.createElement(`div`);
-        createCell.classList.add("cell", size);
+        createCell.classList.add('cell', size);
         createRow.appendChild(createCell);
         createCell.addEventListener(
           `mousedown`,
@@ -44,42 +44,42 @@ const colorPicker = {
     }
   },
 
-  //Applique la couleur à la cellule
-  handlerChangeColorMouseDown: function (event) {
+  // Applique la couleur à la cellule
+  handlerChangeColorMouseDown(event) {
+    const { target } = event;
     if (event.target.id === colorPicker.color) {
-      event.target.id = ``;
-    } else event.target.id = colorPicker.color;
+      target.id = ``;
+    } else target.id = colorPicker.color;
     colorPicker.isDown = true;
   },
-  handlerChangeColorMouseMove: function (event) {
-    console.dir(event);
-
-    if (!!colorPicker.isDown) {
+  handlerChangeColorMouseMove(event) {
+    const { target } = event;
+    if (colorPicker.isDown) {
       if (event.target.id === colorPicker.color) {
-        event.target.id = ``;
-      } else event.target.id = colorPicker.color;
+        target.id = ``;
+      } else target.id = colorPicker.color;
     }
   },
-  handlerChangeColorMouseUp: function (event) {
+  handlerChangeColorMouseUp() {
     colorPicker.isDown = false;
   },
 
-  //Formulaire pour dimentionner la grille et les cellules
-  sizeGrill: function () {
-    formElem = document.getElementById(`configuration`);
+  // Formulaire pour dimentionner la grille et les cellules
+  sizeGrill() {
+    const formElem = document.getElementById(`configuration`);
     formElem.addEventListener(`submit`, (event) => {
       event.preventDefault();
 
       const inputSizeGrillElem = document.getElementById(`size`);
       const inputSizeCellElem = document.getElementById(`cellSize`);
       colorPicker.gridSize = inputSizeGrillElem.valueAsNumber;
-      let value = inputSizeCellElem.valueAsNumber;
+      const value = inputSizeCellElem.valueAsNumber;
       inputSizeGrillElem.innerHTML = ``;
       inputSizeCellElem.innerHTML = ``;
       colorPicker.element.innerHTML = ``;
 
       if (value === 10 || value === 20 || value === 30) {
-        let sizeCell = `cell-${value}`;
+        const sizeCell = `cell-${value}`;
         colorPicker.generateGrill(colorPicker.gridSize, sizeCell);
       } else {
         colorPicker.element.innerHTML = `Définissez la taille de la grille
@@ -89,7 +89,7 @@ const colorPicker = {
     });
   },
 
-  init: function () {
+  init() {
     colorPicker.element = document.getElementById(`containerGrill`);
     colorPicker.generateGrill(colorPicker.gridSize, `cell-20`);
     colorPicker.getColor();
